@@ -1,687 +1,406 @@
 <div class="main">
-    <div class="card-main">
-        <div class="col-12 col-sm-12 col-xs-1">
-            <div class="card shadow">
-                <div class="content">
-                    <div class="header">
-                        <div class="title">
-                            <h4 class="text-due">
-                                Total Due:<span style="color: #43a047">
-                                    AED 177,383.69</span
-                                >
-                            </h4>
-                        </div>
-                        <div class="sort-content">
-                            <div class="sort-item">
-                                <div class="sort">
-                                    <i class="bi bi-filter-circle"></i
-                                    ><span
-                                        class="pl-2 pr-2"
-                                        style="font-weight: 600"
-                                        >Sort by</span
-                                    >
-                                </div>
-                                <div class="filter">
-                                    <i class="bi bi bi-funnel"></i
-                                    ><span
-                                        class="pl-2 pr-2"
-                                        style="font-weight: 600"
-                                        >Filter</span
-                                    >
-                                </div>
-                            </div>
+  <div class="card-main">
+    <div class="col-12 col-sm-12 col-xs-1">
+      <div class="card shadow">
+        <div class="content">
+          <div class="header">
+            <div class="title">
+              <h4 class="text-due">
+                Total Due:<span style="color: #43a047"> AED 177,383.69</span>
+              </h4>
+            </div>
+            <div class="sort-content">
+              <div class="sort-item">
+                <div class="sort">
+                  <i class="bi bi-filter-circle"></i
+                  ><span class="pl-2 pr-2" style="font-weight: 600"
+                    >Sort by</span
+                  >
+                </div>
+                <div class="filter">
+                  <i class="bi bi bi-funnel"></i
+                  ><span class="pl-2 pr-2" style="font-weight: 600"
+                    >Filter</span
+                  >
+                </div>
+              </div>
 
-                            <div class="col-10">
-                                <div class="search">
-                                    <input
-                                        type="text"
-                                        class="input"
-                                        placeholder="search"
-                                    />
-                                </div>
+              <div class="col-10">
+                <div class="search">
+                  <input type="text" class="input" placeholder="search" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div >
+            <div class="container-fluid">
+              <div class="row">
+                <div
+                  class="col-md-3 col-xs-1 col-sm-12 item"
+                  cdkDropList
+                  #openlist="cdkDropList"
+                  [cdkDropListData]="OPEN"
+                  [cdkDropListConnectedTo]="[wiplist, readylist, paymentlist]"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <h5 [ngStyle]="{'margin-left': '10px'}">Open</h5>
+                  <div class="card" cdkDrag *ngFor="let datainfo of OPEN">
+                    <div class="card-body">
+                      <div class="card-top">
+                        <div class="info">
+                          <span  [ngStyle]="{'color': 'green'}"
+                            >#{{ datainfo.refid
+                            }}<span class="badge badge-danger ml-2"
+                              >Payment</span
+                            ></span
+                          >
+                          <div class="info-car">
+                            <div class="car">
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-car pr-2"
+                                ></i
+                                >{{ datainfo.vehiclename }}</span
+                              ><br />
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-user pr-2"
+                                ></i
+                                >{{ datainfo.user }}</span
+                              >
                             </div>
+                          </div>
                         </div>
+
+                        <div class="col-6">
+                          <div class="repair">
+                            <i class="bi bi-link-45deg"></i>Repair Order
+                          </div>
+                          <div class="invoice">
+                            <i class="bi bi-link-45deg"></i>Invoice
+                          </div>
+                          <div class="whatsapp">
+                            <span
+                              ><i
+                                style="color: green"
+                                class="fa fa-whatsapp pr-2"
+                              ></i
+                              >Whatsapp</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr />
+                      <div class="card-middle">
+                        <div class="flex">
+                          <span class="title">INVOICE</span><br />
+                          <span class="number">{{ datainfo.invoice }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">CREATED BY</span><br />
+                          <span class="number">{{ datainfo.createdBy }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">COMPLETION DATE</span><br />
+                          <span class="number">{{ datainfo.completedAt }}</span>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="card-bottom">
+                        <div class="flex">
+                          <span class="title">TOTAL</span><br />
+                          <span class="numberinfo">{{
+                            datainfo.totalAmount
+                          }}</span>
+                        </div>
+                        <div class="flex col-5 float-right">
+                          <span class="title">AMOUNT DUE</span><br />
+                          <span class="number" style="color: #e53935">{{
+                            datainfo.amountDue
+                          }}</span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div
-                                    class="col-md-3 col-xs-1 col-sm-12 item"
-                                    cdkDropList
-                                    #openlist="cdkDropList"
-                                    [cdkDropListData]="OPEN"
-                                    [cdkDropListConnectedTo]="[
-                                        wiplist,
-                                        readylist,
-                                        paymentlist
-                                    ]"
-                                    (cdkDropListDropped)="drop($event)"
-                                >
-                                    <div
-                                        class="card"
-                                        cdkDrag
-                                        *ngFor="let datainfo of OPEN"
-                                    >
-                                        <div class="card-body">
-                                            <div class="card-top">
-                                                <div class="info">
-                                                    <span
-                                                        >#{{ datainfo.refid
-                                                        }}<span
-                                                            class="
-                                                                badge
-                                                                badge-danger
-                                                                ml-2
-                                                            "
-                                                            >Payment</span
-                                                        ></span
-                                                    >
-                                                    <div class="info-car">
-                                                        <div class="car">
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-car
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.vehiclename
-                                                                }}</span
-                                                            ><br />
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-user
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.user
-                                                                }}</span
-                                                            >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="repair">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Repair Order
-                                                    </div>
-                                                    <div class="invoice">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Invoice
-                                                    </div>
-                                                    <div class="whatsapp">
-                                                        <span
-                                                            ><i
-                                                                style="
-                                                                    color: green;
-                                                                "
-                                                                class="
-                                                                    fa
-                                                                    fa-whatsapp
-                                                                    pr-2
-                                                                "
-                                                            ></i
-                                                            >Whatsapp</span
-                                                        >
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr />
-                                            <div class="card-middle">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >INVOICE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.invoice
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >CREATED BY</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.createdBy
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >COMPLETION DATE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.completedAt
-                                                    }}</span>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="card-bottom">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >TOTAL</span
-                                                    ><br />
-                                                    <span class="numberinfo">{{
-                                                        datainfo.totalAmount
-                                                    }}</span>
-                                                </div>
-                                                <div
-                                                    class="
-                                                        flex
-                                                        col-5
-                                                        float-right
-                                                    "
-                                                >
-                                                    <span class="title"
-                                                        >AMOUNT DUE</span
-                                                    ><br />
-                                                    <span
-                                                        class="number"
-                                                        style="color: #e53935"
-                                                        >{{
-                                                            datainfo.amountDue
-                                                        }}</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="col-md-3 col-xs-1 col-sm-12 item"
-                                    cdkDropList
-                                    #wiplist="cdkDropList"
-                                    [cdkDropListConnectedTo]="[
-                                        readylist,
-                                        paymentlist
-                                    ]"
-                                    [cdkDropListData]="WIP"
-                                    (cdkDropListDropped)="drop($event)"
-                                >
-                                    <div
-                                        class="card"
-                                        cdkDrag
-                                        *ngFor="let datainfo of WIP"
-                                    >
-                                        <div class="card-body">
-                                            <div class="card-top">
-                                                <div class="info">
-                                                    <span
-                                                        >#{{ datainfo.refid
-                                                        }}<span
-                                                            class="
-                                                                badge
-                                                                badge-danger
-                                                                ml-2
-                                                            "
-                                                            >Payment</span
-                                                        ></span
-                                                    >
-                                                    <div class="info-car">
-                                                        <div class="car">
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-car
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.vehiclename
-                                                                }}</span
-                                                            ><br />
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-user
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.user
-                                                                }}</span
-                                                            >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="repair">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Repair Order
-                                                    </div>
-                                                    <div class="invoice">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Invoice
-                                                    </div>
-                                                    <div class="whatsapp">
-                                                        <span
-                                                            ><i
-                                                                style="
-                                                                    color: green;
-                                                                "
-                                                                class="
-                                                                    fa
-                                                                    fa-whatsapp
-                                                                    pr-2
-                                                                "
-                                                            ></i
-                                                            >Whatsapp</span
-                                                        >
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr />
-                                            <div class="card-middle">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >INVOICE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.invoice
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >CREATED BY</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.createdBy
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >COMPLETION DATE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.completedAt
-                                                    }}</span>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="card-bottom">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >TOTAL</span
-                                                    ><br />
-                                                    <span class="numberinfo">{{
-                                                        datainfo.totalAmount
-                                                    }}</span>
-                                                </div>
-                                                <div
-                                                    class="
-                                                        flex
-                                                        col-5
-                                                        float-right
-                                                    "
-                                                >
-                                                    <span class="title"
-                                                        >AMOUNT DUE</span
-                                                    ><br />
-                                                    <span
-                                                        class="number"
-                                                        style="color: #e53935"
-                                                        >{{
-                                                            datainfo.amountDue
-                                                        }}</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="col-md-3 col-xs-1 col-sm-12 item"
-                                    cdkDropList
-                                    #readylist="cdkDropList"
-                                    [cdkDropListData]="READY"
-                                    [cdkDropListConnectedTo]="[paymentlist]"
-                                    (cdkDropListDropped)="drop($event)"
-                                >
-                                    <div
-                                        class="card"
-                                        cdkDrag
-                                        *ngFor="let datainfo of READY"
-                                    >
-                                        <div class="card-body">
-                                            <div class="card-top">
-                                                <div class="info">
-                                                    <span
-                                                        >#{{ datainfo.refid
-                                                        }}<span
-                                                            class="
-                                                                badge
-                                                                badge-danger
-                                                                ml-2
-                                                            "
-                                                            >Payment</span
-                                                        ></span
-                                                    >
-                                                    <div class="info-car">
-                                                        <div class="car">
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-car
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.vehiclename
-                                                                }}</span
-                                                            ><br />
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-user
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.user
-                                                                }}</span
-                                                            >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="repair">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Repair Order
-                                                    </div>
-                                                    <div class="invoice">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Invoice
-                                                    </div>
-                                                    <div class="whatsapp">
-                                                        <span
-                                                            ><i
-                                                                style="
-                                                                    color: green;
-                                                                "
-                                                                class="
-                                                                    fa
-                                                                    fa-whatsapp
-                                                                    pr-2
-                                                                "
-                                                            ></i
-                                                            >Whatsapp</span
-                                                        >
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr />
-                                            <div class="card-middle">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >INVOICE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.invoice
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >CREATED BY</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.createdBy
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >COMPLETION DATE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.completedAt
-                                                    }}</span>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="card-bottom">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >TOTAL</span
-                                                    ><br />
-                                                    <span class="numberinfo">{{
-                                                        datainfo.totalAmount
-                                                    }}</span>
-                                                </div>
-                                                <div
-                                                    class="
-                                                        flex
-                                                        col-5
-                                                        float-right
-                                                    "
-                                                >
-                                                    <span class="title"
-                                                        >AMOUNT DUE</span
-                                                    ><br />
-                                                    <span
-                                                        class="number"
-                                                        style="color: #e53935"
-                                                        >{{
-                                                            datainfo.amountDue
-                                                        }}</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div
-                                    class="col-md-3 col-xs-1 col-sm-12 item"
-                                    cdkDropList
-                                    #paymentlist="cdkDropList"
-                                    [cdkDropListData]="PAYMENTDUE"
-                                    (cdkDropListDropped)="drop($event)"
-                                >
-                                    <div
-                                        class="card"
-                                        cdkDrag
-                                        *ngFor="let datainfo of PAYMENTDUE"
-                                    >
-                                        <div class="card-body">
-                                            <div class="card-top">
-                                                <div class="info">
-                                                    <span
-                                                        >#{{ datainfo.refid
-                                                        }}<span
-                                                            class="
-                                                                badge
-                                                                badge-danger
-                                                                ml-2
-                                                            "
-                                                            >Payment</span
-                                                        ></span
-                                                    >
-                                                    <div class="info-car">
-                                                        <div class="car">
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-car
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.vehiclename
-                                                                }}</span
-                                                            ><br />
-                                                            <span
-                                                                ><i
-                                                                    style="
-                                                                        color: gray;
-                                                                    "
-                                                                    class="
-                                                                        fa
-                                                                        fa-user
-                                                                        pr-2
-                                                                    "
-                                                                ></i
-                                                                >{{
-                                                                    datainfo.user
-                                                                }}</span
-                                                            >
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="repair">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Repair Order
-                                                    </div>
-                                                    <div class="invoice">
-                                                        <i
-                                                            class="
-                                                                bi bi-link-45deg
-                                                            "
-                                                        ></i
-                                                        >Invoice
-                                                    </div>
-                                                    <div class="whatsapp">
-                                                        <span
-                                                            ><i
-                                                                style="
-                                                                    color: green;
-                                                                "
-                                                                class="
-                                                                    fa
-                                                                    fa-whatsapp
-                                                                    pr-2
-                                                                "
-                                                            ></i
-                                                            >Whatsapp</span
-                                                        >
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <hr />
-                                            <div class="card-middle">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >INVOICE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.invoice
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >CREATED BY</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.createdBy
-                                                    }}</span>
-                                                </div>
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >COMPLETION DATE</span
-                                                    ><br />
-                                                    <span class="number">{{
-                                                        datainfo.completedAt
-                                                    }}</span>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <div class="card-bottom">
-                                                <div class="flex">
-                                                    <span class="title"
-                                                        >TOTAL</span
-                                                    ><br />
-                                                    <span class="numberinfo">{{
-                                                        datainfo.totalAmount
-                                                    }}</span>
-                                                </div>
-                                                <div
-                                                    class="
-                                                        flex
-                                                        col-5
-                                                        float-right
-                                                    "
-                                                >
-                                                    <span class="title"
-                                                        >AMOUNT DUE</span
-                                                    ><br />
-                                                    <span
-                                                        class="number"
-                                                        style="color: #e53935"
-                                                        >{{
-                                                            datainfo.amountDue
-                                                        }}</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                  </div>
+                </div>
+                <div
+                  class="col-md-3 col-xs-1 col-sm-12 item"
+                  cdkDropList
+                  #wiplist="cdkDropList"
+                  [cdkDropListConnectedTo]="[readylist, paymentlist]"
+                  [cdkDropListData]="WIP"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                <h5  [ngStyle]="{'margin-left': '10px'}">Wip</h5>
+                  <div class="card" cdkDrag *ngFor="let datainfo of WIP">
+                    <div class="card-body">
+                      <div class="card-top">
+                        <div class="info">
+                          <span  [ngStyle]="{'color': 'green'}"
+                            >#{{ datainfo.refid
+                            }}<span class="badge badge-danger ml-2"
+                              >Payment</span
+                            ></span
+                          >
+                          <div class="info-car">
+                            <div class="car">
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-car pr-2"
+                                ></i
+                                >{{ datainfo.vehiclename }}</span
+                              ><br />
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-user pr-2"
+                                ></i
+                                >{{ datainfo.user }}</span
+                              >
                             </div>
+                          </div>
+                        </div>
 
-                            <!-- <div class="item-column">
+                        <div class="col-6">
+                          <div class="repair">
+                            <i class="bi bi-link-45deg"></i>Repair Order
+                          </div>
+                          <div class="invoice">
+                            <i class="bi bi-link-45deg"></i>Invoice
+                          </div>
+                          <div class="whatsapp">
+                            <span
+                              ><i
+                                style="color: green"
+                                class="fa fa-whatsapp pr-2"
+                              ></i
+                              >Whatsapp</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr />
+                      <div class="card-middle">
+                        <div class="flex">
+                          <span class="title">INVOICE</span><br />
+                          <span class="number">{{ datainfo.invoice }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">CREATED BY</span><br />
+                          <span class="number">{{ datainfo.createdBy }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">COMPLETION DATE</span><br />
+                          <span class="number">{{ datainfo.completedAt }}</span>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="card-bottom">
+                        <div class="flex">
+                          <span class="title">TOTAL</span><br />
+                          <span class="numberinfo">{{
+                            datainfo.totalAmount
+                          }}</span>
+                        </div>
+                        <div class="flex col-5 float-right">
+                          <span class="title">AMOUNT DUE</span><br />
+                          <span class="number" style="color: #e53935">{{
+                            datainfo.amountDue
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-md-3 col-xs-1 col-sm-12 item"
+                  cdkDropList
+                  #readylist="cdkDropList"
+                  [cdkDropListData]="READY"
+                  [cdkDropListConnectedTo]="[paymentlist]"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                <h5 [ngStyle]="{'margin-left': '10px'}">Ready</h5>
+                  <div class="card" cdkDrag *ngFor="let datainfo of READY">
+                    <div class="card-body">
+                      <div class="card-top">
+                        <div class="info">
+                          <span  [ngStyle]="{'color': 'green'}"
+                            >#{{ datainfo.refid
+                            }}<span class="badge badge-danger ml-2"
+                              >Payment</span
+                            ></span
+                          >
+                          <div class="info-car">
+                            <div class="car">
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-car pr-2"
+                                ></i
+                                >{{ datainfo.vehiclename }}</span
+                              ><br />
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-user pr-2"
+                                ></i
+                                >{{ datainfo.user }}</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="repair">
+                            <i class="bi bi-link-45deg"></i>Repair Order
+                          </div>
+                          <div class="invoice">
+                            <i class="bi bi-link-45deg"></i>Invoice
+                          </div>
+                          <div class="whatsapp">
+                            <span
+                              ><i
+                                style="color: green"
+                                class="fa fa-whatsapp pr-2"
+                              ></i
+                              >Whatsapp</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr />
+                      <div class="card-middle">
+                        <div class="flex">
+                          <span class="title">INVOICE</span><br />
+                          <span class="number">{{ datainfo.invoice }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">CREATED BY</span><br />
+                          <span class="number">{{ datainfo.createdBy }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">COMPLETION DATE</span><br />
+                          <span class="number">{{ datainfo.completedAt }}</span>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="card-bottom">
+                        <div class="flex">
+                          <span class="title">TOTAL</span><br />
+                          <span class="numberinfo">{{
+                            datainfo.totalAmount
+                          }}</span>
+                        </div>
+                        <div class="flex col-5 float-right">
+                          <span class="title">AMOUNT DUE</span><br />
+                          <span class="number" style="color: #e53935">{{
+                            datainfo.amountDue
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col-md-3 col-xs-1 col-sm-12 item"
+                  cdkDropList
+                  #paymentlist="cdkDropList"
+                  [cdkDropListData]="PAYMENTDUE"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                <h5 [ngStyle]="{'margin-left': '10px'}">Payment Due</h5>
+                  <div class="card" cdkDrag *ngFor="let datainfo of PAYMENTDUE">
+                    <div class="card-body">
+                      <div class="card-top">
+                        <div class="info">
+                          <span  [ngStyle]="{'color': 'green'}"
+                            >#{{ datainfo.refid
+                            }}<span class="badge badge-danger ml-2"
+                              >Payment</span
+                            ></span
+                          >
+                          <div class="info-car">
+                            <div class="car">
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-car pr-2"
+                                ></i
+                                >{{ datainfo.vehiclename }}</span
+                              ><br />
+                              <span
+                                ><i
+                                  style="color: gray"
+                                  class="fa fa-user pr-2"
+                                ></i
+                                >{{ datainfo.user }}</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <div class="repair">
+                            <i class="bi bi-link-45deg"></i>Repair Order
+                          </div>
+                          <div class="invoice">
+                            <i class="bi bi-link-45deg"></i>Invoice
+                          </div>
+                          <div class="whatsapp">
+                            <span
+                              ><i
+                                style="color: green"
+                                class="fa fa-whatsapp pr-2"
+                              ></i
+                              >Whatsapp</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr />
+                      <div class="card-middle">
+                        <div class="flex">
+                          <span class="title">INVOICE</span><br />
+                          <span class="number">{{ datainfo.invoice }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">CREATED BY</span><br />
+                          <span class="number">{{ datainfo.createdBy }}</span>
+                        </div>
+                        <div class="flex">
+                          <span class="title">COMPLETION DATE</span><br />
+                          <span class="number">{{ datainfo.completedAt }}</span>
+                        </div>
+                      </div>
+                      <hr />
+                      <div class="card-bottom">
+                        <div class="flex">
+                          <span class="title">TOTAL</span><br />
+                          <span class="numberinfo">{{
+                            datainfo.totalAmount
+                          }}</span>
+                        </div>
+                        <div class="flex col-5 float-right">
+                          <span class="title">AMOUNT DUE</span><br />
+                          <span class="number" style="color: #e53935">{{
+                            datainfo.amountDue
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div class="item-column">
                         <div class="item-item">
                   
                         </div>
@@ -700,10 +419,10 @@
                               </div>
                         </div>
                     </div> -->
-                        </div>
-                    </div>
-                </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
